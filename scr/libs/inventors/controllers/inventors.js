@@ -1,10 +1,10 @@
-const InventorsDAO = require('../DAO/inventors');
-const _inventors = new InventorsController;
+const {InventorsDAO} = require('../DAO/inventors');
+const _inventors = new InventorsDAO;
 
-export default class InventorsController{
+class InventorsController{
 
     async getInventors(){
-        return _inventors.getInventors();
+        return await _inventors.getInventors();
     }
 
     async postInventor(inventor){
@@ -19,3 +19,5 @@ export default class InventorsController{
 
     }
 }
+
+module.exports={InventorsController}

@@ -1,9 +1,13 @@
 const express = require('express');
 const router = express.Router();
 
+const {InventorsController} = require('../controllers/inventors');
+const _inventors = new InventorsController;
+
 router.get('/inventors',async (req,res)=>{
     try {
-        res.send({ok:true,data:'Nice'})
+        let resp = await _inventors.getInventors();
+        res.send({ok:true,data:resp})
     } catch (error) {
         res.send({ok:true,error:error})
     }

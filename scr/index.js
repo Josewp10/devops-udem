@@ -14,7 +14,9 @@ app.get("/", (req, res) => {
 
 const inventions = require('./libs/inventions/routes/inventions');
 app.use(inventions);
-  
+
+const inventors = require('./libs/inventors/routes/inventors');
+app.use(inventors);
 
 const port = config.get('SERVER.port')
 app.listen(port, () => {
