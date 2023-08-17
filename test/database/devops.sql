@@ -29,7 +29,7 @@ SET row_security = off;
 -- Dependencies: 210
 -- Data for Name: Inventors; Type: TABLE DATA; Schema: public; Owner: -
 --
-CREATE TABLE IF NOT EXISTS public."Inventors"
+CREATE TABLE /*IF NOT EXISTS*/ public."Inventors"
 (
     id SERIAL NOT NULL ,
     name character varying COLLATE pg_catalog."default",
@@ -40,7 +40,7 @@ TABLESPACE pg_default;
 ALTER TABLE IF EXISTS public."Inventors"
     OWNER to devops;
 
-CREATE TABLE IF NOT EXISTS public."Inventions"
+CREATE TABLE /*IF NOT EXISTS*/ public."Inventions"
 (
     id SERIAL NOT NULL ,
     name character varying COLLATE pg_catalog."default" NOT NULL,
