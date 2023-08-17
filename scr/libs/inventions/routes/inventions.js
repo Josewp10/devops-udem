@@ -17,7 +17,7 @@ router.post('/inventions',async (req,res)=>{
     try {
         let body = req.body;
         await _Inventions.postInvention(body);
-        res.send({ok:true,message:'Invention data saved'})
+        res.status(201).send({ok:true,message:'Invention data saved'})
     } catch (error) {
         res.send({ok:false,error:error})
     }
