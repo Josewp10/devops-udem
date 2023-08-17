@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test:mocha": "NODE_ENV=test NODE_CONFIG_DIR='./scr/config/' npx mocha test/inventors/inventors.test.js",
-    "test:docker": "docker-compose -f test/database/docker-compose.yml up -d", 
-    "test": "NODE_ENV=test npm run test:docker && npm run test:mocha",
+    "test:docker_init": "docker-compose -f test/database/docker-compose.yml up -d", 
+    "test:docker_stop": "docker-compose -f test/database/docker-compose.yml down", 
+    "test": "NODE_ENV=test npm run test:docker_init && sleep 3 && npm run test:mocha && npm run test:docker_stop",
     "dev": "NODE_ENV=dev NODE_CONFIG_DIR='./scr/config/' node scr/index.js"
   },
   "repository": {

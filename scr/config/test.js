@@ -3,7 +3,7 @@ require('dotenv/config')
 const config = {
     //SECRET_KEY:process.env.SECRET_KEY,
     SERVER:{
-        port:3001
+        port:3002
     },
     DB:{
         host:'localhost',

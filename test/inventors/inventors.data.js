@@ -4,6 +4,13 @@ const getInventors = [
     { "id": 4, "name": "Marie Curie"}
 ]
 
+const postInventor = {name:"Copernico"}
+const putInventor = {id:5,name:"Don copernico"}
+const deleteInventor = 5;
+
 module.exports = {
-    getInventors
+    getInventors,
+    postInventor,
+    putInventor,
+    deleteInventor
 }

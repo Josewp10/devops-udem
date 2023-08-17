@@ -63,8 +63,8 @@ INSERT INTO public."Inventors" (id, name) VALUES (2, 'Thomas Edison');
 INSERT INTO public."Inventors" (id, name) VALUES (3, 'Nikola Tesla');
 INSERT INTO public."Inventors" (id, name) VALUES (4, 'Marie Curie');
 
-INSERT INTO public."Inventions" (id, name, year, description, inventor) VALUES (3, 'Incandescent Light Bulb', '1879', ' Edison''s light bulb revolutionized indoor lighting by providing a practical and efficient source of electric light', 2);
-INSERT INTO public."Inventions" (id, name, year, description, inventor) VALUES (4, 'Phonograph', '1877', 'The phonograph was a device that could record and reproduce sound, pioneering the audio recording industry', 2);
+INSERT INTO public."Inventions" (id, name, year, description, inventor) VALUES (1 'Incandescent Light Bulb', '1879', ' Edison''s light bulb revolutionized indoor lighting by providing a practical and efficient source of electric light', 2);
+INSERT INTO public."Inventions" (id, name, year, description, inventor) VALUES (2, 'Phonograph', '1877', 'The phonograph was a device that could record and reproduce sound, pioneering the audio recording industry', 2);
 INSERT INTO public."Inventions" (id, name, year, description, inventor) VALUES (5, 'Alternating Current (AC) System', '1880s', 'Tesla''s AC system transformed the way electricity is transmitted and distributed, making long-distance power transmission possible', 3);
 INSERT INTO public."Inventions" (id, name, year, description, inventor) VALUES (6, 'Tesla Coil', '1891', 'The Tesla Coil is an electrical resonant transformer circuit used for generating high-voltage, low-current, high-frequency alternating-current electricity', 3);
 INSERT INTO public."Inventions" (id, name, year, description, inventor) VALUES (7, 'X-ray Machine', '1896', 'Marie Curie''s work in X-rays included the development of portable X-ray machines for use in field hospitals during World War I', 4);

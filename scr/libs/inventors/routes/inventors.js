@@ -17,7 +17,7 @@ router.post('/inventors',async (req,res)=>{
     try {
         let body = req.body;
         await _inventors.postInventor(body);
-        res.send({ok:true,message:'Inventor data saved'})
+        res.status(201).send({ok:true,message:'Inventor data saved'})
     } catch (error) {
         res.send({ok:false,error:error})
     }
