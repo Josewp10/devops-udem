@@ -11,6 +11,11 @@ app.get("/", (req, res) => {
     res.send("UdeM DevOps line of emphasis 2023-2.  1st exercise ");
   });
 
+
+const inventions = require('./libs/inventions/routes/inventions');
+app.use(inventions);
+  
+
 const port = config.get('SERVER.port')
 app.listen(port, () => {
     console.log(`Escuchando API en PORT:${port}`);
