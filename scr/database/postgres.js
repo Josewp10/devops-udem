@@ -1,21 +1,25 @@
-const {pool, Pool} = require('pg');
+const { Pool } = require('pg');
 const config = require('config');
-const dbConfig = config.get('DB')
+const dbConfig = config.get('DB');
 
 class ServicePg {
-    
-    constructor(){
-        this.pool = new Pool(dbConfig);
-    }
+  constructor() {
+    this.pool = new Pool(dbConfig);
+  }
 
-// Ejecuta la clase y el metodo se debe hacer
-// de forma asincrona para que respuesta tenga un valor
-  
-async executeSQL(sql,params) {
-    let response = await this.pool.query(sql,params);
-    return response;
+  async executeSQL(sql, params) {
+    try {
+      const response = await this.pool.query(sql, params);
+      return response.rows;
+    } catch (error) {
+      console.error('Error executing query:', error);
+      throw error;
+    }
+  }
+
+  async close() {
+    await this.pool.end();
   }
 }
-
 
 module.exports = ServicePg;
