@@ -4,7 +4,7 @@
   "description": "UdeM DevOps line of emphasis 2023-2",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "NODE_ENV=dev NODE_CONFIG_DIR='./scr/config/' npx mocha test/inventors/inventors.test.js",
     "dev": "NODE_ENV=dev NODE_CONFIG_DIR='./scr/config/' node scr/index.js"
   },
   "repository": {
@@ -18,7 +18,11 @@
   },
   "homepage": "https://github.com/Josewp10/devops-udem#readme",
   "devDependencies": {
-    "nodemon": "^3.0.1"
+    "chai": "^4.3.7",
+    "jest": "^29.6.2",
+    "mocha": "^10.2.0",
+    "nodemon": "^3.0.1",
+    "supertest": "^6.3.3"
   },
   "dependencies": {
     "config": "^3.3.9",

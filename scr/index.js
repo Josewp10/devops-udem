@@ -22,3 +22,5 @@ const port = config.get('SERVER.port')
 app.listen(port, () => {
     console.log(`Escuchando API en PORT:${port}`);
 });
+
+module.exports = app;
