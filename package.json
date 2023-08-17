@@ -4,7 +4,9 @@
   "description": "UdeM DevOps line of emphasis 2023-2",
   "main": "index.js",
   "scripts": {
-    "test": "NODE_ENV=dev NODE_CONFIG_DIR='./scr/config/' npx mocha test/inventors/inventors.test.js",
+    "test:mocha": "NODE_ENV=test NODE_CONFIG_DIR='./scr/config/' npx mocha test/inventors/inventors.test.js",
+    "test:docker": "docker-compose -f test/database/docker-compose.yml up -d", 
+    "test": "NODE_ENV=test npm run test:docker && npm run test:mocha",
     "dev": "NODE_ENV=dev NODE_CONFIG_DIR='./scr/config/' node scr/index.js"
   },
   "repository": {
