@@ -33,7 +33,7 @@ DROP TABLE IF EXISTS public."Inventors";
 CREATE TABLE IF NOT EXISTS public."Inventors"
 (
     id SERIAL NOT NULL ,
-    name character varying COLLATE pg_catalog."default",
+    name character varying NOT NULL COLLATE pg_catalog."default",
     CONSTRAINT "Inventors_pkey" PRIMARY KEY (id)
 )
 
