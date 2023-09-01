@@ -26,7 +26,7 @@ jobs:
       env:
         CC_TEST_REPORTER_ID: ${{ vars.CODE_CLIMATE_ID }}
       with:
-        coverageCommand: npm run tests
+        coverageCommand: npm run test
         coverageLocations: coverage/coverage-final.json
         debug: true
     
