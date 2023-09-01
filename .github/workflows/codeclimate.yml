@@ -31,4 +31,4 @@ jobs:
       with:
         coverageCommand: npm run test
         #coverageLocations: coverage/coverage-final.json
-        coverageLocations:  ${{github.workspace}}/coverage/coverage-final.json:json
+        coverageLocations:  ${{github.workspace}}/coverage/*.info:lcov
