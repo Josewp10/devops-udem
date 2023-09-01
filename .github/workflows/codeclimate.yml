@@ -28,3 +28,5 @@ jobs:
       uses: paambaati/codeclimate-action@v5.0.0
       env:
         CC_TEST_REPORTER_ID: ${{ vars.CODE_CLIMATE_ID }}
+      with:
+        coverageLocations: coverage/coverage-final.json
