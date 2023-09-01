@@ -30,4 +30,5 @@ jobs:
         CC_TEST_REPORTER_ID: ${{ vars.CODE_CLIMATE_ID }}
       with:
         coverageCommand: npm run test
-        coverageLocations: coverage/coverage-final.json
+        #coverageLocations: coverage/coverage-final.json
+        coverageLocations:  ${{github.workspace}}/coverage/*.lcov:lcov
