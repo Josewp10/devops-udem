@@ -5,9 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test:mocha": "NODE_ENV=test NODE_CONFIG_DIR='./scr/config/' npx mocha --exit test/inventors/inventors.test.js",
-    "test:docker_init": "docker-compose -f test/database/docker-compose.yml up -d", 
-    "test:docker_stop": "docker-compose -f test/database/docker-compose.yml down", 
-    "test": "NODE_ENV=test npm run test:docker_init && sleep 1 && npm run test:mocha && npm run test:docker_stop",
+    "test:docker_init": "docker-compose -f test/database/docker-compose.yml up -d",
+    "test:docker_stop": "docker-compose -f test/database/docker-compose.yml down",
+    "test2": "NODE_ENV=test npm run test:docker_init && sleep 1 && npm run test:mocha && npm run test:docker_stop",
+    "test": "NODE_ENV=test npm run test:docker_init && sleep 1 && npm run test:mocha-with-coverage && npm run test:docker_stop",
+    "test:mocha-with-coverage": "NODE_ENV=test NODE_CONFIG_DIR='./scr/config/' npx nyc --reporter=json --reporter=text npx mocha --exit test/inventors/inventors.test.js",
     "dev": "NODE_ENV=dev NODE_CONFIG_DIR='./scr/config/' node scr/index.js"
   },
   "repository": {
@@ -25,6 +27,7 @@
     "jest": "^29.6.2",
     "mocha": "^10.2.0",
     "nodemon": "^3.0.1",
+    "nyc": "^15.1.0",
     "supertest": "^6.3.3"
   },
   "dependencies": {

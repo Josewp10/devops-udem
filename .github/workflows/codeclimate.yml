@@ -1,0 +1,33 @@
+name: Run Tests
+
+on:
+  push:
+    branches:
+      - cicd-setup  
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: 18  # Change to the desired Node.js version
+
+    - name: Install dependencies
+      run: npm install
+  
+    - name: Test & publish code coverage
+      uses: paambaati/codeclimate-action@v5.0.0
+      env:
+        CC_TEST_REPORTER_ID: ${{ vars.CODE_CLIMATE_ID }}
+      with:
+        coverageCommand: npm run tests
+        coverageLocations: coverage/coverage-final.json
+        debug: true
+    
+    
