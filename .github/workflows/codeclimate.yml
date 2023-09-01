@@ -20,14 +20,11 @@ jobs:
 
     - name: Install dependencies
       run: npm install
-  
+
+    - name: Run tests
+      run: npm run test
+    
     - name: Test & publish code coverage
       uses: paambaati/codeclimate-action@v5.0.0
       env:
         CC_TEST_REPORTER_ID: ${{ vars.CODE_CLIMATE_ID }}
-      with:
-        coverageCommand: npm run test
-        coverageLocations: ${{github.workspace}}/coverage/coverage-final.json
-        debug: true
-    
-    
