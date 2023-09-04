@@ -1,0 +1,186 @@
+{
+	"info": {
+		"_postman_id": "cf628fe2-5659-4646-ab99-d53163a51d91",
+		"name": "DevOps",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "11078320"
+	},
+	"item": [
+		{
+			"name": "Inventions",
+			"item": [
+				{
+					"name": "Inventions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/inventions",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"inventions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Inventions",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Incandescent Light Bulb\",\n    \"year\": \"1879\",\n    \"description\": \" Edison's light bulb revolutionized indoor lighting by providing a practical and efficient source of electric light\",\n    \"inventor\": 2\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/inventions",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"inventions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/inventions?id=2",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"inventions"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Inventors",
+			"item": [
+				{
+					"name": "inventors",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/inventors",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"inventors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Inventors",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"Copérnico\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/inventors",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"inventors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n            \"id\": 1,\n            \"name\": \"Copérnicooooooooooo\"\n        }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/inventors",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"inventors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/inventors?id=1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"inventors"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
