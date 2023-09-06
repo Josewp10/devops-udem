@@ -3,7 +3,7 @@ name: Run Tests
 on:
   push:
     branches:
-      - dev  
+      - cicd-setup  
 
 jobs:
   test:
@@ -23,3 +23,34 @@ jobs:
 
     - name: Run tests
       run: npm run test
+
+  build:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      
+      - name: Configure Elastic Container Registry credentials
+        run: |
+            aws configure set aws_access_key_id ${{ secrets.AWS_DEVOPS_ACCES_KEY }} --region ${{ vars.AWS_REGION }}       
+            aws configure set aws_secret_access_key ${{ secrets.AWS_DEVOPS_SECRET_ACCES_KEY }} --region ${{ vars.AWS_REGION }}    
+      
+      - name: ECR log-in
+        run: aws ecr get-login-password --region ${{ vars.AWS_REGION }} | docker login --username AWS --password-stdin ${{vars.ECR_REPOSITORY_URL}}
+
+      - name: Build docker image
+        run: |
+          docker build \
+            --build-arg DB_USER_ENV=${{ secrets.DB_USER }}  \
+            --build-arg DB_PASSWORD_ENV=${{ secrets.DB_PASSWORD }}  \
+            --build-arg DB_HOST_ENV=${{ secrets.DB_HOST }}  \
+            --build-arg AWS_DEVOPS_ACCES_KEY_ENV=${{ secrets.AWS_DEVOPS_ACCES_KEY }}  \
+            --build-arg AWS_DEVOPS_SECRET_ACCES_KEY_ENV=${{ secrets.AWS_DEVOPS_SECRET_ACCES_KEY }}  \
+            -t devops-udem:devops-${{ github.run_id }} .
+
+      - name: Tag image
+        run: docker tag devops-udem:devops-${{ github.run_id }} ${{vars.ECR_REPOSITORY_URL}}/devops-udem:devops-${{ github.run_id }}
+      
+      - name: Push image
+        run: docker push ${{vars.ECR_REPOSITORY_URL}}/devops-udem:devops-${{ github.run_id }}
