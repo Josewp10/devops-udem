@@ -52,13 +52,13 @@ jobs:
       - name: Tag image
         run: docker tag devops-udem:devops-${{ github.run_id }} ${{vars.ECR_REPOSITORY_URL}}/devops-udem:devops-${{ github.run_id }}
       
-     # - name: Push image
-       # run: docker push ${{vars.ECR_REPOSITORY_URL}}/devops-udem:devops-${{ github.run_id }}
+      - name: Push image
+        run: docker push ${{vars.ECR_REPOSITORY_URL}}/devops-udem:devops-${{ github.run_id }}
 
   deploy:
     runs-on: ubuntu-latest
     environment: dev
-    #needs: build
+    needs: build
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -75,7 +75,7 @@ jobs:
       - name: Copy a file from s3
         uses: jakejarvis/s3-sync-action@master
         with:
-          args: --follow-symlinks --delete
+          args: --follow-symlinks --delete --exclude '.git*' --exclude 'src/'  --exclude 'test/'
         env:
           AWS_S3_BUCKET: 'elasticbeanstalk-us-east-1-308516746479'
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_DEVOPS_ACCES_KEY }}
@@ -85,3 +85,6 @@ jobs:
          
       - name: Create elastic beanstalk app version
         run: aws elasticbeanstalk create-application-version --region ${{ vars.AWS_REGION }} --application-name DevOpsUdem --version-label devops-${{ github.run_id }} --source-bundle S3Bucket=elasticbeanstalk-us-east-1-308516746479,S3Key=Dockerrun.aws.json
+
+      - name: Update elastic beanstalk environment
+        run: aws elasticbeanstalk update-environment --region ${{ vars.AWS_REGION }} --application-name DevOpsUdem --environment-name DevOpsUdem-env --version-label=devops-${{ github.run_id }}
