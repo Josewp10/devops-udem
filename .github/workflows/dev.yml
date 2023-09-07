@@ -52,8 +52,8 @@ jobs:
       - name: Tag image
         run: docker tag devops-udem:devops-${{ github.run_id }} ${{vars.ECR_REPOSITORY_URL}}/devops-udem:devops-${{ github.run_id }}
       
-      #- name: Push image
-        #run: docker push ${{vars.ECR_REPOSITORY_URL}}/devops-udem:devops-${{ github.run_id }}
+      - name: Push image
+        run: docker push ${{vars.ECR_REPOSITORY_URL}}/devops-udem:devops-${{ github.run_id }}
 
   deploy:
     runs-on: ubuntu-latest
@@ -74,4 +74,4 @@ jobs:
 
       - name: Upload Dockerrun.aws.json to AWS S3
         run: |
-          aws s3 cp Dockerrun.aws.json s3://elasticbeanstalk-us-east-1-308516746479/
+          aws s3 cp ./Dockerrun.aws.json s3://elasticbeanstalk-us-east-1-308516746479/Dockerrun.aws.json
