@@ -79,6 +79,7 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_DEVOPS_ACCES_KEY }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_DEVOPS_SECRET_ACCES_KEY }}
           AWS_REGION: ${{ vars.AWS_REGION }}          # optional: defaults to us-east-1
-          SOURCE_DIR: './*.aws.json'      # optional: defaults to entire repository
+          SOURCE_DIR: './'      # optional: defaults to entire repository
          
-      
+      - name: Create elastic beanstalk app version
+        run: aws elasticbeanstalk create-application-version --application-name DevOpsUdem --version-label devops-${{ github.run_id }} --source-bundle S3Bucket=elasticbeanstalk-us-east-1-308516746479,S3Key=Dockerrun.aws.json
