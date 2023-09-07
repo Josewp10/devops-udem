@@ -55,7 +55,7 @@ jobs:
       - name: Push image
         run: docker push ${{vars.ECR_REPOSITORY_URL}}/devops-udem:devops-${{ github.run_id }}
 
-  build:
+  deploy:
     runs-on: ubuntu-latest
     environment: dev
     needs: build
