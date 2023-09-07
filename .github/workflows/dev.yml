@@ -60,6 +60,9 @@ jobs:
     environment: dev
     #needs: build
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      
       - name: Create Dockerrun.aws.json
         run: |
             echo '{ "AWSEBDockerrunVersion": "1", "Image": {"Name": "${{vars.ECR_REPOSITORY_URL}}/devops-udem:devops-${{ github.run_id }}"},"Ports": [{"ContainerPort": 3001}]}' > ${{ github.workspace }}/Dockerrun.aws.json
@@ -72,4 +75,4 @@ jobs:
       - name: Copy a file from s3
         run: |
           ls ${{ github.workspace }}
-          aws s3 cp ${{ github.workspace }}/Dockerrun.aws.json s3://elasticbeanstalk-us-east-1-308516746479/Dockerrun.aws.json/
+          aws s3 cp ${{ github.workspace }}/Dockerrun.aws.json s3://elasticbeanstalk-us-east-1-308516746479/Dockerrun.aws.json
