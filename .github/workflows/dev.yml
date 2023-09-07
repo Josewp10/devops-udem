@@ -66,3 +66,12 @@ jobs:
           ls
           pwd
           cat Dockerrun.aws.json
+      
+      - name: Configure aws credentials
+        run: |
+            aws configure set aws_access_key_id ${{ secrets.AWS_DEVOPS_ACCES_KEY }} --region ${{ vars.AWS_REGION }}       
+            aws configure set aws_secret_access_key ${{ secrets.AWS_DEVOPS_SECRET_ACCES_KEY }} --region ${{ vars.AWS_REGION }}    
+
+      - name: Upload Dockerrun.aws.json to AWS S3
+        run: |
+          aws s3 cp Dockerrun.aws.json s3://elasticbeanstalk-us-east-1-308516746479/
