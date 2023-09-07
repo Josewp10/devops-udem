@@ -75,4 +75,5 @@ jobs:
       - name: Copy a file from s3
         run: |
           ls ${{ github.workspace }}
-          aws s3 cp ${{ github.workspace }}/Dockerrun.aws.json s3://elasticbeanstalk-us-east-1-308516746479/Dockerrun.aws.json
+          cd $GITHUB_WORKSPACE
+          aws s3 cp Dockerrun.aws.json s3://elasticbeanstalk-us-east-1-308516746479/Dockerrun.aws.json
