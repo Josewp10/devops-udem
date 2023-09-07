@@ -60,7 +60,6 @@ jobs:
     environment: dev
     needs: build
     steps:
-
       - name: Create Dockerrun.aws.json
         run: |
           echo '{ "AWSEBDockerrunVersion": "1", "Image": {"Name": "${{vars.ECR_REPOSITORY_URL}}/devops-udem:devops-${{ github.run_id }}"},"Ports": [{"ContainerPort": 3001}]}' > Dockerrun.aws.json
