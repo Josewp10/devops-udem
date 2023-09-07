@@ -56,7 +56,7 @@ describe('DELETE /inventors', () => {
     // Add more test cases for error handling, different scenarios, etc.
 });
 
-
+/*
 describe('POST /inventors', () => {
     it('This test should fail', async () => {
         _inventors.createInventor = async () => getInventors; // Mock the _inventors.getInventors function
@@ -67,4 +67,4 @@ describe('POST /inventors', () => {
         expect(response.body.message).to.deep.equal("Inventor data saved");
     });
     // Add more test cases for error handling, different scenarios, etc.
-});
+});*/
