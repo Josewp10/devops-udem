@@ -46,8 +46,7 @@ jobs:
             --build-arg DB_USER_ENV=${{ secrets.DB_USER }}  \
             --build-arg DB_PASSWORD_ENV=${{ secrets.DB_PASSWORD }}  \
             --build-arg DB_HOST_ENV=${{ secrets.DB_HOST }}  \
-            --build-arg AWS_DEVOPS_ACCES_KEY_ENV=${{ secrets.AWS_DEVOPS_ACCES_KEY }}  \
-            --build-arg AWS_DEVOPS_SECRET_ACCES_KEY_ENV=${{ secrets.AWS_DEVOPS_SECRET_ACCES_KEY }}  \
+            --build-arg NODE_ENVIRONMENT=dev \
             -t devops-udem:devops-${{ github.run_id }} .
 
       - name: Tag image
