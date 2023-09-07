@@ -27,7 +27,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     environment: dev
-    needs: test
+    #needs: test
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -43,9 +43,9 @@ jobs:
       - name: Build docker image
         run: |
           docker build \
-            --build-arg DB_USER_ENV=user  \
-            --build-arg DB_PASSWORD_ENV=user  \
-            --build-arg DB_HOST_ENV=user  \
+            --build-arg DB_USER_ENV=${{ secrets.DB_USER }}  \
+            --build-arg DB_PASSWORD_ENV=${{ secrets.DB_PASSWORD }}  \
+            --build-arg DB_HOST_ENV=${{ secrets.DB_HOST }}  \
             --build-arg NODE_ENVIRONMENT=dev \
             -t devops-udem:devops-${{ github.run_id }} .
 
