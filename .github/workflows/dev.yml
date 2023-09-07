@@ -62,11 +62,7 @@ jobs:
     steps:
       - name: Create Dockerrun.aws.json
         run: |
-            ls
-            pwd
-            cat Dockerrun.aws.json
-            echo '{ "AWSEBDockerrunVersion": "1", "Image": {"Name": "${{vars.ECR_REPOSITORY_URL}}/devops-udem:devops-${{ github.run_id }}"},"Ports": [{"ContainerPort": 3001}]}' > Dockerrun.aws.json
-            cat Dockerrun.aws.json
+            echo '{ "AWSEBDockerrunVersion": "1", "Image": {"Name": "${{vars.ECR_REPOSITORY_URL}}/devops-udem:devops-${{ github.run_id }}"},"Ports": [{"ContainerPort": 3001}]}' > ${{ github.workspace }}/Dockerrun.aws.json
 
       - name: Configure aws credentials
         run: |
@@ -79,4 +75,4 @@ jobs:
           aws_access_key_id: ${{ secrets.AWS_DEVOPS_ACCES_KEY }}
           aws_secret_access_key: ${{ secrets.AWS_DEVOPS_SECRET_ACCES_KEY }}
           source: 's3://elasticbeanstalk-us-east-1-308516746479/Dockerrun.aws.json'
-          dest: 'Dockerrun.aws.json'
+          dest: '${{ github.workspace }}/Dockerrun.aws.json'
