@@ -52,8 +52,8 @@ jobs:
       - name: Tag image
         run: docker tag devops-udem:devops-${{ github.run_id }} ${{vars.ECR_REPOSITORY_URL}}/devops-udem:devops-${{ github.run_id }}
       
-      - name: Push image
-        run: docker push ${{vars.ECR_REPOSITORY_URL}}/devops-udem:devops-${{ github.run_id }}
+     # - name: Push image
+       # run: docker push ${{vars.ECR_REPOSITORY_URL}}/devops-udem:devops-${{ github.run_id }}
 
   deploy:
     runs-on: ubuntu-latest
@@ -78,4 +78,4 @@ jobs:
           aws_access_key_id: ${{ secrets.AWS_DEVOPS_ACCES_KEY }}
           aws_secret_access_key: ${{ secrets.AWS_DEVOPS_SECRET_ACCES_KEY }}
           source: 's3://elasticbeanstalk-us-east-1-308516746479/Dockerrun.aws.json'
-          dest: './Dockerrun.aws.json'
+          dest: Dockerrun.aws.json
