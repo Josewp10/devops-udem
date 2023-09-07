@@ -74,6 +74,8 @@ jobs:
 
       - name: Copy a file from s3
         uses: jakejarvis/s3-sync-action@master
+        with:
+          args: --follow-symlinks --delete
         env:
           AWS_S3_BUCKET: 'elasticbeanstalk-us-east-1-308516746479'
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_DEVOPS_ACCES_KEY }}
@@ -82,4 +84,4 @@ jobs:
           SOURCE_DIR: './'      # optional: defaults to entire repository
          
       - name: Create elastic beanstalk app version
-        run: aws elasticbeanstalk create-application-version --application-name DevOpsUdem --version-label devops-${{ github.run_id }} --source-bundle S3Bucket=elasticbeanstalk-us-east-1-308516746479,S3Key=Dockerrun.aws.json
+        run: aws elasticbeanstalk create-application-version --region ${{ vars.AWS_REGION }} --application-name DevOpsUdem --version-label devops-${{ github.run_id }} --source-bundle S3Bucket=elasticbeanstalk-us-east-1-308516746479,S3Key=Dockerrun.aws.json
