@@ -52,8 +52,8 @@ jobs:
       - name: Tag image
         run: docker tag devops-udem:devops-${{ github.run_id }} ${{vars.ECR_REPOSITORY_URL}}/devops-udem:devops-${{ github.run_id }}
       
-      - name: Push image
-        run: docker push ${{vars.ECR_REPOSITORY_URL}}/devops-udem:devops-${{ github.run_id }}
+      #- name: Push image
+        #run: docker push ${{vars.ECR_REPOSITORY_URL}}/devops-udem:devops-${{ github.run_id }}
 
   deploy:
     runs-on: ubuntu-latest
@@ -65,3 +65,4 @@ jobs:
           echo '{ "AWSEBDockerrunVersion": "1", "Image": {"Name": "${{vars.ECR_REPOSITORY_URL}}/devops-udem:devops-${{ github.run_id }}"},"Ports": [{"ContainerPort": 3001}]}' > Dockerrun.aws.json
           ls
           pwd
+          cat Dockerrun.aws.json
