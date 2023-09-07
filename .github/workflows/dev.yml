@@ -72,6 +72,10 @@ jobs:
             aws configure set aws_access_key_id ${{ secrets.AWS_DEVOPS_ACCES_KEY }} --region ${{ vars.AWS_REGION }}       
             aws configure set aws_secret_access_key ${{ secrets.AWS_DEVOPS_SECRET_ACCES_KEY }} --region ${{ vars.AWS_REGION }}    
 
-      - name: Upload Dockerrun.aws.json to AWS S3
-        run: |
-          aws s3 cp ./Dockerrun.aws.json s3://elasticbeanstalk-us-east-1-308516746479/Dockerrun.aws.json
+      - name: Copy a file from s3
+        uses: prewk/s3-cp-action@v2
+        with:
+          aws_access_key_id: ${{ secrets.AWS_DEVOPS_ACCES_KEY }}
+          aws_secret_access_key: ${{ secrets.AWS_DEVOPS_SECRET_ACCES_KEY }}
+          source: 's3://elasticbeanstalk-us-east-1-308516746479/Dockerrun.aws.json'
+          dest: './Dockerrun.aws.json'
