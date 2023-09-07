@@ -63,14 +63,14 @@ jobs:
       - name: Create Dockerrun.aws.json
         run: |
           echo '{ "AWSEBDockerrunVersion": "1", "Image": {"Name": "${{vars.ECR_REPOSITORY_URL}}/devops-udem:devops-${{ github.run_id }}"},"Ports": [{"ContainerPort": 3001}]}' > Dockerrun.aws.json
-          ls
-          pwd
-          cat Dockerrun.aws.json
       
       - name: Configure aws credentials
         run: |
             aws configure set aws_access_key_id ${{ secrets.AWS_DEVOPS_ACCES_KEY }} --region ${{ vars.AWS_REGION }}       
             aws configure set aws_secret_access_key ${{ secrets.AWS_DEVOPS_SECRET_ACCES_KEY }} --region ${{ vars.AWS_REGION }}    
+            ls
+            pwd
+            cat Dockerrun.aws.json
 
       - name: Copy a file from s3
         uses: prewk/s3-cp-action@v2
