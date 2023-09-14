@@ -11,12 +11,18 @@ jobs:
     environment: dev
 
     steps:
-    - name: codeclimate
+    - name: Checkout
       uses: actions/checkout@master
+
+    - name: Install node
       uses: actions/setup-node@master
       with:
-        node-version: '18'
+        node-version: 18
+
+    - name: Install dependencies
       run: npm install
+
+    - name: Codeclimate
       uses: paambaati/codeclimate-action@v2.2.4
       env:
         CC_TEST_REPORTER_ID: ${{ secrets.CODECLIMATE_ACCESS_TOKEN }}
