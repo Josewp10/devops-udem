@@ -9,14 +9,15 @@ jobs:
   test:
     runs-on: ubuntu-latest
     environment: dev
+
     steps:
     - name: codeclimate
-    - uses: actions/checkout@master
-    - uses: actions/setup-node@master
+      uses: actions/checkout@master
+      uses: actions/setup-node@master
       with:
         node-version: '18'
-    - run: npm install
-    - uses: paambaati/codeclimate-action@v2.2.4
+      run: npm install
+      uses: paambaati/codeclimate-action@v2.2.4
       env:
         CC_TEST_REPORTER_ID: ${{ secrets.CODECLIMATE_ACCESS_TOKEN }}
       with:
