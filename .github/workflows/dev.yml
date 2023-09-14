@@ -3,7 +3,7 @@ name: Run Tests
 on:
   push:
     branches:
-      - dev 
+      - Josewp10-patch-1 
 
 jobs:
   test:
@@ -26,71 +26,6 @@ jobs:
     
     - name: Codacy coverage report
       run: |
-         ls -a \
-         echo "CODACY_PROJECT_TOKEN=${{ secrets.CODACY_TOKEN }}" >> $GITHUB_ENV \
-         curl -Ls https://coverage.codacy.com/get.sh
+         ls -a
 
-  build:
-    runs-on: ubuntu-latest
-    environment: dev
-    needs: test
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-      
-      - name: Configure Elastic Container Registry credentials
-        run: |
-            aws configure set aws_access_key_id ${{ secrets.AWS_DEVOPS_ACCES_KEY }} --region ${{ vars.AWS_REGION }}       
-            aws configure set aws_secret_access_key ${{ secrets.AWS_DEVOPS_SECRET_ACCES_KEY }} --region ${{ vars.AWS_REGION }}    
-      
-      - name: ECR log-in
-        run: aws ecr get-login-password --region ${{ vars.AWS_REGION }} | docker login --username AWS --password-stdin ${{vars.ECR_REPOSITORY_URL}}
-
-      - name: Build docker image
-        run: |
-          docker build \
-            --build-arg DB_USER_ENV=${{ secrets.DB_USER }}  \
-            --build-arg DB_PASSWORD_ENV=${{ secrets.DB_PASSWORD }}  \
-            --build-arg DB_HOST_ENV=${{ secrets.DB_HOST }}  \
-            --build-arg NODE_ENVIRONMENT=dev \
-            -t devops-udem:devops-${{ github.run_id }} .
-
-      - name: Tag image
-        run: docker tag devops-udem:devops-${{ github.run_id }} ${{vars.ECR_REPOSITORY_URL}}/devops-udem:devops-${{ github.run_id }}
-      
-      - name: Push image
-        run: docker push ${{vars.ECR_REPOSITORY_URL}}/devops-udem:devops-${{ github.run_id }}
-
-  deploy:
-    runs-on: ubuntu-latest
-    environment: dev
-    needs: build
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-      
-      - name: Create Dockerrun.aws.json
-        run: |
-            echo '{ "AWSEBDockerrunVersion": "1", "Image": {"Name": "${{vars.ECR_REPOSITORY_URL}}/devops-udem:devops-${{ github.run_id }}"},"Ports": [{"ContainerPort": 3001}]}' > ${{ github.workspace }}/Dockerrun.aws.json
-
-      - name: Configure aws credentials
-        run: |
-            aws configure set aws_access_key_id ${{ secrets.AWS_DEVOPS_ACCES_KEY }} --region ${{ vars.AWS_REGION }}       
-            aws configure set aws_secret_access_key ${{ secrets.AWS_DEVOPS_SECRET_ACCES_KEY }} --region ${{ vars.AWS_REGION }}    
-
-      - name: Copy a file from s3
-        uses: jakejarvis/s3-sync-action@master
-        with:
-          args: --follow-symlinks --delete --exclude '.git*' --exclude 'src/'  --exclude 'test/'
-        env:
-          AWS_S3_BUCKET: 'elasticbeanstalk-us-east-1-308516746479'
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_DEVOPS_ACCES_KEY }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_DEVOPS_SECRET_ACCES_KEY }}
-          AWS_REGION: ${{ vars.AWS_REGION }}          # optional: defaults to us-east-1
-          SOURCE_DIR: './'      # optional: defaults to entire repository
-         
-      - name: Create elastic beanstalk app version
-        run: aws elasticbeanstalk create-application-version --region ${{ vars.AWS_REGION }} --application-name DevOpsUdem --version-label devops-${{ github.run_id }} --source-bundle S3Bucket=elasticbeanstalk-us-east-1-308516746479,S3Key=Dockerrun.aws.json
-
-      - name: Update elastic beanstalk environment
-        run: aws elasticbeanstalk update-environment --region ${{ vars.AWS_REGION }} --application-name DevOpsUdem --environment-name DevOpsUdem-env --version-label=devops-${{ github.run_id }}
+ 
