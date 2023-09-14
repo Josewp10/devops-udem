@@ -3,7 +3,7 @@ name: Run Tests
 on:
   push:
     branches:
-      - cicd-setup  
+      - dev  
 
 jobs:
   test:
