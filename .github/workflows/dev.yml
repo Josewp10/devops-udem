@@ -26,6 +26,7 @@ jobs:
     
     - name: Codacy coverage report
       run: |
+         ls -a \
          echo "CODACY_PROJECT_TOKEN=${{ secrets.CODACY_TOKEN }}" >> $GITHUB_ENV \
          curl -Ls https://coverage.codacy.com/get.sh
 
