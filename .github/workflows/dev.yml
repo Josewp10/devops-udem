@@ -3,7 +3,7 @@ name: Run Tests
 on:
   push:
     branches:
-      - dev 
+      - none
 
 jobs:
   test:
@@ -25,11 +25,16 @@ jobs:
       run: npm run test
     
     - name: Codacy coverage report
+<<<<<<< Updated upstream
       run: |
          ls -a \
          echo "CODACY_PROJECT_TOKEN=${{ secrets.CODACY_TOKEN }}" >> $GITHUB_ENV \
          curl -Ls https://coverage.codacy.com/get.sh
 
+=======
+      run:  docker run --rm --name codacy -e CODACY_PROJECT_TOKEN=${{ secrets.CODACY_TOKEN }} -w /usr/src/app -v $(pwd):/usr/src/app/ ubuntu bash -c "apt update && apt install curl -y && bash <(curl -Ls https://coverage.codacy.com/get.sh)"
+      
+>>>>>>> Stashed changes
   build:
     runs-on: ubuntu-latest
     environment: dev
